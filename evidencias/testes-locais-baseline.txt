@@ -1,0 +1,6 @@
+EVIDÊNCIA LOCAL — AMBIENTE DE EXECUÇÃO DESTE PACOTE
+Comando: python -m pytest -q test_app.py test_analyst.py
+Observação: Flask não está instalado neste ambiente; testes HTTP são pulados.
+
+....ss...                                                                [100%]
+7 passed, 2 skipped in 0.04s

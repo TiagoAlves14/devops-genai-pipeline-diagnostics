@@ -1,0 +1,15 @@
+EVIDÊNCIA LOCAL — FALHA INTENCIONAL (NÃO É PIPELINE GITLAB)
+Mudança: return float(base_price) + float(tax_rate) -> return base_price + tax_rate
+Comando: python -m pytest -q test_app.py test_analyst.py
+Código de saída observado: 1
+Ambiente sem Flask: testes HTTP não foram executados.
+
+E       TypeError: unsupported operand type(s) for +: 'float' and 'str'
+
+app.py:9: TypeError
+=========================== short test summary info ============================
+FAILED test_app.py::test_calculate_shipping_with_string_rate - TypeError: unsupported operand type(s) for +: 'float' and 'str'
+FAILED test_app.py::test_calculate_shipping_cases[0.0-0-0.0] - TypeError: unsupported operand type(s) for +: 'float' and 'str'
+FAILED test_app.py::test_calculate_shipping_cases[10.0-2.5-12.5] - TypeError: unsupported operand type(s) for +: 'float' and 'str'
+FAILED test_app.py::test_calculate_shipping_cases[19.9-0.10-20.0] - TypeError: unsupported operand type(s) for +: 'float' and 'str'
+4 failed, 3 passed, 2 skipped in 0.10s

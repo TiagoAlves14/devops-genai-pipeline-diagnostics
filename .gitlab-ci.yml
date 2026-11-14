@@ -1,0 +1,44 @@
+image: python:3.11-slim
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - when: never
+
+stages:
+  - test
+  - genai_analysis
+
+variables:
+  GIT_DEPTH: "0"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+unit_test:
+  stage: test
+  script:
+    - python -m pip install -r requirements.txt
+    - python -m pytest -q test_app.py test_analyst.py > pytest.log 2>&1 || { cat pytest.log; exit 1; }
+    - cat pytest.log
+  artifacts:
+    when: always
+    paths:
+      - pytest.log
+    expire_in: 7 days
+
+ai_debugger:
+  stage: genai_analysis
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: on_failure
+    - when: never
+  dependencies:
+    - unit_test
+  script:
+    - python -m pip install -r requirements.txt
+    - python genai_analyst.py
+  artifacts:
+    when: always
+    paths:
+      - diagnosis.md
+    expire_in: 7 days

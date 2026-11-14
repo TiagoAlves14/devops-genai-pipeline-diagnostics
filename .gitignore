@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+.env
+*.log
+diagnosis.md
+diagnosis_prompt_preview.txt
+*.egg-info/
+.DS_Store
