@@ -6,7 +6,7 @@ A versão principal está correta. A falha é injetada apenas em uma branch de l
 
 def calculate_shipping(base_price: float, tax_rate: str) -> float:
     """Soma preço-base e taxa de frete recebida como texto."""
-    return float(base_price) + float(tax_rate)
+    return base_price + tax_rate  # ERRO INTENCIONAL: soma de float com str
 
 
 def create_app():
