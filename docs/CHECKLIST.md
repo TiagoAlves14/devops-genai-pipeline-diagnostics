@@ -2,11 +2,11 @@
 
 ## Preparação de código
 - [x] Analisar a Unidade 5 e o exemplo do laboratório.
-- [x] Definir nome e estrutura do repositório.
+- [x] Definir nome, estrutura e criar repositório público no GitHub.
 - [x] Criar API OrderService, testes, agente e configuração GitLab CI.
 - [x] Criar script reprodutível de injeção de falha.
 - [x] Criar workflow GitHub Actions de testes.
-- [ ] Confirmar o workflow verde no repositório remoto GitHub.
+- [x] Confirmar workflow GitHub Actions verde na primeira execução (run #1).
 
 ## Execução no GitLab (evidências exigidas pelo fórum)
 - [ ] Criar o repositório no GitLab.
