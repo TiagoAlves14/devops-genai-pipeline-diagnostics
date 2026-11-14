@@ -13,7 +13,7 @@
 - [x] Espelhar código da `main` e obter pipeline aprovado — #3068321629, job #18032305039, 9 passed (0,09s).
 - [ ] Configurar `OPENAI_API_KEY` mascarada com acesso restrito.
 - [ ] Opcional: cadastrar `GITLAB_API_TOKEN` para comentários em MRs.
-- [ ] Criar `feature/falha-frete`, injetar TypeError e abrir Merge Request.
+- [x] Criar `feature/falha-frete` no GitHub, injetar TypeError e sincronizar com GitLab (GitHub Actions run #43600981535, tentativa 2: sucesso).\n- [ ] Abrir Merge Request de `feature/falha-frete` para `main` no GitLab.
 - [ ] Verificar falha no `unit_test` e acionamento de `ai_debugger`.
 - [ ] Examinar `diagnosis.md` da IA (não confundir com um exemplo simulado).
 - [ ] Validar diagnóstico e correção, reexecutando os testes.
