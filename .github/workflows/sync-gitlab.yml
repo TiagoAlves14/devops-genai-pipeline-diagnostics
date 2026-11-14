@@ -1,0 +1,57 @@
+name: Sync experiment branch to GitLab
+
+# The GitLab import was a one-time copy. This workflow synchronizes ONLY
+# the experimental branch; it never modifies main in GitLab.
+on:
+  push:
+    branches:
+      - feature/falha-frete
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/feature/falha-frete'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate GitLab credentials
+        env:
+          GITLAB_PUSH_TOKEN: ${{ secrets.GITLAB_PUSH_TOKEN }}
+        run: |
+          if [ -z "$GITLAB_PUSH_TOKEN" ]; then
+            echo "::error::GITLAB_PUSH_TOKEN not configured. Go to GitHub Settings > Secrets and variables > Actions, create the repository secret, then rerun this workflow."
+            exit 1
+          fi
+
+      - name: Push only the experimental branch to GitLab
+        env:
+          GITLAB_PUSH_TOKEN: ${{ secrets.GITLAB_PUSH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Keep the token out of git remote URLs, repository files and command output.
+          askpass="$(mktemp)"
+          trap 'rm -f "$askpass"' EXIT
+          cat > "$askpass" <<'SH'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' "oauth2" ;;
+            *Password*) printf '%s\n' "$GITLAB_PUSH_TOKEN" ;;
+            *) printf '\n' ;;
+          esac
+          SH
+          chmod 700 "$askpass"
+          export GIT_ASKPASS="$askpass"
+          export GIT_TERMINAL_PROMPT=0
+
+          # Non-force push rejects divergent histories to protect work done in GitLab.
+          git push https://gitlab.com/tiagoalvess14/devops-genai-pipeline-diagnostics.git \
+            HEAD:refs/heads/feature/falha-frete
