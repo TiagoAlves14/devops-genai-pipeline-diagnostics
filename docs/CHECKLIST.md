@@ -9,8 +9,8 @@
 - [x] Confirmar workflow GitHub Actions verde na primeira execução (run #1).
 
 ## Execução no GitLab (evidências exigidas pelo fórum)
-- [ ] Criar o repositório no GitLab.
-- [ ] Espelhar o código da `main` e obter pipeline de testes aprovado.
+- [x] Criar o repositório no GitLab: https://gitlab.com/tiagoalvess14/devops-genai-pipeline-diagnostics
+- [x] Espelhar código da `main` e obter pipeline aprovado — #3068321629, job #18032305039, 9 passed (0,09s).
 - [ ] Configurar `OPENAI_API_KEY` mascarada com acesso restrito.
 - [ ] Opcional: cadastrar `GITLAB_API_TOKEN` para comentários em MRs.
 - [ ] Criar `feature/falha-frete`, injetar TypeError e abrir Merge Request.
